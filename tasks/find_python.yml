@@ -1,0 +1,12 @@
+---
+- name: find python via script
+  script: find_python.sh
+  register: mypython
+
+- debug:
+    msg: "found {{ mypython.stdout }}"
+
+- name: set interpreter
+  set_fact:
+    ansible_python_interpreter: "{{ mypython.stdout }}"
+  when: mypython.rc == 0

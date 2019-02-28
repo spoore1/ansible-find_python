@@ -1,0 +1,14 @@
+---
+
+- name: set python int via script
+  import_tasks: "{{ role_path }}/tasks/find_python.yml"
+
+- name: set vars based on interpreter
+  include_tasks: "{{ role_path }}/tasks/{{ ansible_python_interpreter | basename }}.yml"
+
+- name: show my vars
+  debug:
+    msg: "my var is {{ item }}"
+  with_items:
+    - "{{ my_var_1 }}"
+    - "{{ my_var_2 }}"

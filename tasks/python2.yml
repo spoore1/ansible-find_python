@@ -1,0 +1,9 @@
+---
+
+- name: setting python2 
+  debug:
+    msg: "found {{ ansible_python_interpreter }}"
+- name: set my var
+  set_fact:
+    my_var_1: "salmon"
+    my_var_2: "shark"
