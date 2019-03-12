@@ -1,14 +1,18 @@
 #!/bin/sh
 
-if [ -f /usr/libexec/platform-python ]; then
-    echo -n /usr/libexec/platform-python
-elif [ -f /usr/bin/python3 ]; then
-    echo -n /usr/bin/python3
-elif [ -f /usr/bin/pyton2 ]; then
-    echo -n /usr/bin/python2
-elif [ -f /usr/bin/python ]; then
-    echo -n /usr/bin/python
-else
-    echo -n python_not_found
-    exit 1
-fi
+PATHS="
+/usr/libexec/platform-python
+/usr/bin/python3
+/usr/bin/python2
+/usr/bin/python
+"
+
+for i in $PATHS; do
+    if [ -f "$i" ]; then
+        echo -n "$i"
+        exit 0
+    fi
+done
+
+echo "python_not_found"
+exit 1
